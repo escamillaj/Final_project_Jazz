@@ -5,7 +5,7 @@
 # modified from http://interactivepython.org/runestone/static/thinkcspy/PythonTurtle/helloturtle.html
 
 # Assignment: Final Project
-# Purpose:
+# Purpose: Add shapes to canvas
 
 ######################################################################
 # Acknowledgements:
@@ -15,45 +15,25 @@
 #
 ######################################################################
 
-import turtle
-import random
+import tkinter as tk
 
-chance = random.Random()
-wn = turtle.Screen()
-wn.bgcolor(chance)
-
-
-#Creates turtle screen
-#class making
-# find public domain images. Add files.
-
-
-class Test:
+class Art_Show:
     def __init__(self):
         """
         Initializer
         """
+        self.wn = tk()
+        self.canvas = tk.canvas  #.. command= draw_shape)
+  #      self.button = TK.button1
+        self.current_shape= tk.image()
         
-    def test_questions(self):
-        """
-        
-        :return:
-        """
-        #Game to play: based on how you play it will determine your path.
-        # ethical questions, random questions,
-        #call Draw here
+    def draw_shape(self,x,y):
+        #self.shape= #new shape, random image from self.image
+    
+    def change_shape(self):
+        # new shape and random pick from self.images
 
-
-
-class Draw:
-    def __init__(self):
-        """
-        Initializer. Sets attributes
-        """
-        #methods- sayings, gif images, squares, triangles,
-        # #turtle.write- list of things choose from
-        # complicated turt images
-        #christmas related
-
-
-#main
+def main():
+    a = Art_Show()
+    
+# What is new, tk.image   and tk canvas
