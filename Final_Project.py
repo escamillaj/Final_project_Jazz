@@ -25,33 +25,38 @@ class Art_Show:
         """
         Initializer
         """
-        
- #       self.Button1.pack()
- #       self.current_shape= tk.image()
-
         self.master = tk.Tk()
-        frame_canvas = tk.Frame(self.master, width=500, height=400)
-        frame_canvas.pack(padx=50, pady=50)
-        self.c = tk.Canvas(frame_canvas, width=1250, height=350, background= "white")
+        self.frame_canvas = tk.Frame(self.master, width=500, height=400)
+        self.frame_canvas.pack(side="left")
+        self.c = tk.Canvas(self.frame_canvas, width=1250, height=350, background= "white")
+        
+        
         self.c.pack()
-        self.Button1 = tk.Button(frame_canvas, command = self.draw_shape)
-        self.Button1.config(text = "Random Shape")
-        self.Button1.pack(padx= 20, pady=30)
-        self.Button2 = tk.Button(frame_canvas, command = self.draw_shape)
-        self.Button2.config(text= "Scenery")
-        self.Button2.pack()
-        
+        #Square button
+        self.Square = tk.Button(self.frame_canvas, command = self.draw_square)
+        self.Square.config(text = "Square")
+        self.Square.pack()
+        self.c.bind("<Key>", key)
+        self.c.bind("<Square>", callback())
     
-        
-        
-    def button_handler(self):
-        """
-        
-        :return:
-        """
-        
     
-    def draw_shape(self):
+        # Rectangle Button
+        self.Rectangle = tk.Button(self.frame_canvas, command = self.draw_rectangle())
+        self.Rectangle.config(text= "Rectangle")
+        self.Rectangle.pack()
+        
+        # Circle Button
+        self.Circle = tk.Button(self.frame_canvas, command = self.draw_circle)
+        self.Circle.config(text= "Circle")
+        self.Circle.pack()
+        
+    def key(self, event):
+        repr(event.chr)
+        
+    def callback(self, event):
+        print("Clicked at", event.x, event.y)
+        
+    def draw_square(self, event):
         """
         
         :param x:
@@ -59,20 +64,46 @@ class Art_Show:
         :return:
         """
         #self.shape= #new shape, random image from self.image
-        circle = tk.PhotoImage(file="Black Circle.gif" )
-        self.c.create_image(100, 100,image= circle)
-        self.c.create_rectangle(10, 10, 30, 10, fill= "black")
-        self.c.create_line(15, 25, 200, 25)
-    
-    def change_shape(self):
+    #    circle = tk.PhotoImage(file="Black Circle.gif" )
+    #    self.c.create_image(100, 100,image= circle)
+        
+        #click event to keep track of which button clicked. To perform tkinter draw shape
+        
+        square = self.c.create_rectangle(event.x, event.y, event.x+10, event.y+10, fill= "black")
+        self.frame_canvas.bind("<Square>", )
+        
+    def draw_circle(self):
         """
         
         :return:
         """
-        # new shape and random pick from self.images
+        
+    def draw_line(self):
+        """
+        
+        :return:
+        """
+        
+        line = self.c.create_line(event.x, event.y, event.x+10, event.y+10)
+        
+    def draw_rectangle(self):
+        """
+        
+        :return:
+        """
+        rectangle = self.c.create_rectangle(event.x, event.y, event.x+40, event.y+50)
+        
+    def draw_oval(self):
+        """
+        
+        :return:
+        """
+        oval= self.c.create_oval(event.x, event.y, event.x+30, event.y+40)
+
 
 def main():
-
+    
+    
     a = Art_Show()      # creates a new tkinter object
     a.c.mainloop()
   
