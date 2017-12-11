@@ -60,8 +60,9 @@ class Art_Show:
         """
         #self.shape= #new shape, random image from self.image
         circle = tk.PhotoImage(file="Black Circle.gif" )
-        self.c.create_image(2,2,image= circle, anchor='center')
-        
+        self.c.create_image(100, 100,image= circle)
+        self.c.create_rectangle(10, 10, 30, 10, fill= "black")
+        self.c.create_line(15, 25, 200, 25)
     
     def change_shape(self):
         """
@@ -70,11 +71,11 @@ class Art_Show:
         """
         # new shape and random pick from self.images
 
+def main():
 
-if __name__ == "__main__":
     a = Art_Show()      # creates a new tkinter object
     a.c.mainloop()
   
-    main()
+main()
 
 # What is new, tk.image   and tk canvas
