@@ -26,84 +26,90 @@ class Art_Show:
         Initializer
         """
         self.master = tk.Tk()
-        self.frame_canvas = tk.Frame(self.master, width=500, height=400)
+        self.frame_canvas = tk.Frame(self.master, width=400, height=400)
+        self.frame_canvas.config(bg="light blue")
+     #   self.frame_canvas.winfo_geometry('400x200+100+50')
+     #   self.frame_canvas.title("Art Show")
+     #   self.frame_canvas.resizable(width=False, height=False)
         self.frame_canvas.pack(side="left")
-        self.c = tk.Canvas(self.frame_canvas, width=1250, height=350, background= "white")
+        self.c = tk.Canvas(self.frame_canvas, width=400, height=350, background= "white")
+        self.c.pack(side="right")
         
-        
-        self.c.pack()
         #Square button
         self.Square = tk.Button(self.frame_canvas, command = self.draw_square)
         self.Square.config(text = "Square")
-        self.Square.pack()
-        self.c.bind("<Key>", key)
-        self.c.bind("<Square>", callback())
-    
+        self.Square.pack(side="left")
+
     
         # Rectangle Button
-        self.Rectangle = tk.Button(self.frame_canvas, command = self.draw_rectangle())
+        self.Rectangle = tk.Button(self.frame_canvas, command= self.draw_rectangle())
         self.Rectangle.config(text= "Rectangle")
-        self.Rectangle.pack()
+        self.Rectangle.pack(side="left")
         
         # Circle Button
-        self.Circle = tk.Button(self.frame_canvas, command = self.draw_circle)
+        self.Circle = tk.Button(self.frame_canvas, command= self.draw_circle)
         self.Circle.config(text= "Circle")
-        self.Circle.pack()
+        self.Circle.pack(side="left")
         
-    def key(self, event):
-        repr(event.chr)
+        # Oval Button
+        self.Oval = tk.Button(self.frame_canvas, command = self.draw_oval)
+        self.Oval.config(text= "Oval")
+        self.Oval.pack(side="left")
         
-    def callback(self, event):
-        print("Clicked at", event.x, event.y)
+        # Line Button
+        self.Line = tk.Button(self.frame_canvas, command= self.draw_line)
+        self.Line.config(text="Line")
+        self.Line.pack(side="left")
         
-    def draw_square(self, event):
+        # Clear Canvas
+        self.Delete_Canvas = tk.Button(self.frame_canvas. command= self.Clear_Canvas)
+        
+    def current_shape(self):
         """
         
-        :param x:
-        :param y:
         :return:
         """
-        #self.shape= #new shape, random image from self.image
-    #    circle = tk.PhotoImage(file="Black Circle.gif" )
-    #    self.c.create_image(100, 100,image= circle)
+        global current_shape
+        current_shape = self.c.create_rectangle(20, 20, 40, 20, fill="Blue", outline="black")
+    
+    def click(self, event):
+        global current_shape
+        if current_shape is not None:
+            cord = self.c.coords(current_shape)
+            width = cord[2]-cord[0]
+            height = cord[3]-cord[1]
+            self.c.coords(current_shape,event.x, event.y, event.x+10, event.y+10 )
+ 
         
+    def draw_square(self):
+
         #click event to keep track of which button clicked. To perform tkinter draw shape
-        
-        square = self.c.create_rectangle(event.x, event.y, event.x+10, event.y+10, fill= "black")
-        self.frame_canvas.bind("<Square>", )
+        global current_shape
+        current_shape = self.c.create_rectangle(20, 20, 70, 20, fill= "black", width=3)
+
         
     def draw_circle(self):
-        """
-        
-        :return:
-        """
+        global current_shape
+        current_shape = self.c.create_oval(10, 10, 40, 40, fill="blue", width= 3)
         
     def draw_line(self):
-        """
-        
-        :return:
-        """
-        
-        line = self.c.create_line(event.x, event.y, event.x+10, event.y+10)
+        global current_shape
+        current_shape = self.c.create_line(100, 1000, 300, 300, fill="black", widt= 5)
         
     def draw_rectangle(self):
-        """
-        
-        :return:
-        """
-        rectangle = self.c.create_rectangle(event.x, event.y, event.x+40, event.y+50)
+        global current_shape
+        self.c.create_rectangle(30, 30, 60, 30, fill="black", width= 3)
         
     def draw_oval(self):
-        """
-        
-        :return:
-        """
-        oval= self.c.create_oval(event.x, event.y, event.x+30, event.y+40)
+        global current_shape
+        current_shape = self.c.create_oval(10, 10, 70, 70, fill= "black", width= 3)
+
+# Eraser to clear Canvas
+# Drag object clicked
+# Textbox to type into canvas.
 
 
 def main():
-    
-    
     a = Art_Show()      # creates a new tkinter object
     a.c.mainloop()
   
